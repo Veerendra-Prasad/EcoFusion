@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Profile.css';
 import MyRewards from './ProfileComponents/MyRewardsComponents/MyRewards';
 import PersonalInformation from './ProfileComponents/PersonalInformation';
+import Wallet from './ProfileComponents/Wallet';
 
 const Profile = () => {
   const [user, setUser] = useState({
@@ -64,6 +65,10 @@ const Profile = () => {
     setSelectedTab(item);
   };
 
+  const handleBalance = (value) => {
+    setUser({...user, balance : String(Number(user.balance.split('$')[0]) + Number(value.split('$')[0])) + '$'})
+  }
+
   const handleMenuItemView = () => {
     switch (selectedTab) {
       case "My Rewards": 
@@ -81,7 +86,8 @@ const Profile = () => {
             user={user}
           />
         )
-          
+      case "My Wallet":
+        return <Wallet balance={user.balance} handleBalance={handleBalance} />;  
     }
   }
 
