@@ -1,0 +1,46 @@
+.wallet-section {
+  padding: 20px;
+}
+
+.balance-section {
+  display: inline-block;
+  font-size: 0.875rem;
+}
+
+.balance {
+  display: inline-block;
+  background-color: #ecfdf5;
+  color: #065f46;
+  padding: 0.25rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+}
+
+.header {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.footer-section {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.transaction-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.trans-section {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #888;
+  margin-top: 20px;
+  height: 25vh;
+  max-height: 40vh;
+  overflow-y: auto;
+}

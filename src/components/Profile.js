@@ -1,33 +1,58 @@
-import React, { useState } from 'react';
-import './Profile.css';
-import MyRewards from './ProfileComponents/MyRewardsComponents/MyRewards';
-import PersonalInformation from './ProfileComponents/PersonalInformation';
-import Wallet from './ProfileComponents/Wallet';
+import React, { useState } from "react";
+import "./Profile.css";
+import MyRewards from "./ProfileComponents/MyRewardsComponents/MyRewards";
+import PersonalInformation from "./ProfileComponents/PersonalInformation";
+import Wallet from "./ProfileComponents/Wallet";
 
 const Profile = () => {
   const [user, setUser] = useState({
-    name: 'John Doe',
-    email: 'johndoe@example.com',
-    mobile: '123-456-7890',
-    gender: 'Male',
+    name: "John Doe",
+    email: "johndoe@example.com",
+    mobile: "123-456-7890",
+    gender: "Male",
     orders: 5,
-    joined: '2020-01-15',
-    country: 'US',
-    profilePic: '/ppic.jpg',
+    joined: "2020-01-15",
+    country: "US",
+    profilePic: "/ppic.jpg",
     balance: "38.00$",
   });
 
   const rewards = [
-    { id: 1, title: '10% off on Electronics', issueDate: '2024-10-01', expired: false },
-    { id: 2, title: 'Buy 1 Get 1 Free', issueDate: '2024-09-15', expired: true },
-    { id: 3, title: '5% Cashback on Grocery', issueDate: '2024-08-10', expired: false },
-    { id: 4, title: '15% off on Fashion', issueDate: '2024-07-30', expired: true },
-    { id: 5, title: '20% off on Flights', issueDate: '2024-09-05', expired: false }
+    {
+      id: 1,
+      title: "10% off on Electronics",
+      issueDate: "2024-10-01",
+      expired: false,
+    },
+    {
+      id: 2,
+      title: "Buy 1 Get 1 Free",
+      issueDate: "2024-09-15",
+      expired: true,
+    },
+    {
+      id: 3,
+      title: "5% Cashback on Grocery",
+      issueDate: "2024-08-10",
+      expired: false,
+    },
+    {
+      id: 4,
+      title: "15% off on Fashion",
+      issueDate: "2024-07-30",
+      expired: true,
+    },
+    {
+      id: 5,
+      title: "20% off on Flights",
+      issueDate: "2024-09-05",
+      expired: false,
+    },
   ];
 
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState({ ...user });
-  const [selectedTab, setSelectedTab] = useState('Personal Information');
+  const [selectedTab, setSelectedTab] = useState("Personal Information");
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -46,19 +71,19 @@ const Profile = () => {
   const handleChange = (e) => {
     setEditedUser({
       ...editedUser,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const menuItems = [
-    'My Wallet',
-    'My Rewards',
-    'My Orders',
-    'Personal Information',
-    'Addresses',
-    'Payment Methods',
-    'Contact Preferences',
-    'Social Networks'
+    "My Wallet",
+    "My Rewards",
+    "My Orders",
+    "Personal Information",
+    "Addresses",
+    "Payment Methods",
+    "Contact Preferences",
+    "Social Networks",
   ];
 
   const handleMenuClick = (item) => {
@@ -66,14 +91,22 @@ const Profile = () => {
   };
 
   const handleBalance = (value) => {
-    setUser({...user, balance : String(Number(user.balance.split('$')[0]) + Number(value.split('$')[0])) + '$'})
-  }
+    setUser({
+      ...user,
+      balance:
+        String(
+          parseFloat(
+            Number(user.balance.split("$")[0]) + Number(value.split("$")[0])
+          ).toFixed(2)
+        ) + "$",
+    });
+  };
 
   const handleMenuItemView = () => {
     switch (selectedTab) {
-      case "My Rewards": 
-        return <MyRewards rewards={rewards}/>; 
-      case "Personal Information": 
+      case "My Rewards":
+        return <MyRewards rewards={rewards} />;
+      case "Personal Information":
         return (
           <PersonalInformation
             selectedTab={selectedTab}
@@ -85,11 +118,11 @@ const Profile = () => {
             editedUser={editedUser}
             user={user}
           />
-        )
+        );
       case "My Wallet":
-        return <Wallet balance={user.balance} handleBalance={handleBalance} />;  
+        return <Wallet balance={user.balance} handleBalance={handleBalance} />;
     }
-  }
+  };
 
   return (
     <div className="profile-container">
@@ -107,9 +140,7 @@ const Profile = () => {
               />
             </div>
             <h2 className="profile-name">{user.name}</h2>
-            <div className="balance-badge">
-              Balance: {user.balance}
-            </div>
+            <div className="balance-badge">Balance: {user.balance}</div>
           </div>
 
           {/* Navigation Menu */}
@@ -118,7 +149,9 @@ const Profile = () => {
               {menuItems.map((item, index) => (
                 <button
                   key={index}
-                  className={`nav-button ${selectedTab === item ? 'selected' : ''}`}
+                  className={`nav-button ${
+                    selectedTab === item ? "selected" : ""
+                  }`}
                   onClick={() => handleMenuClick(item)}
                 >
                   {item}
